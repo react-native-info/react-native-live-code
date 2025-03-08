@@ -1,0 +1,35 @@
+{
+  "name": "react-native-live-code",
+  "version": "0.0.2",                     
+  "type": "module",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "build": "microbundle --no-compress --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "dev": "microbundle watch --jsx"
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.26.7",
+    "@codemirror/lang-javascript": "^6.2.3",
+    "@uiw/codemirror-theme-okaidia": "^4.23.9",
+    "@uiw/react-codemirror": "^4.23.9",
+    "codemirror": "^6.0.1",
+    "react-native": "^0.77.0",
+    "react-native-web": "^0.19.13"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-native-info/react-native-live-code.git"
+  },
+  "homepage": "https://reactnative.info"
+}
+
