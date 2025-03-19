@@ -4,10 +4,11 @@ import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 
-export const RNLiveCodeEditor = ({ width, height }) => {
+export const RNLiveCodeEditor = ({ width, height, theme, onCodeChange }) => {
   const { context, dispatch } = useContext(RNLiveCodeContext);
 
   const onChange = useCallback((code) => {
+    onCodeChange?.(code);
     dispatch({ type: 'editing', code })
   }, []);
 
@@ -24,7 +25,7 @@ export const RNLiveCodeEditor = ({ width, height }) => {
         value={context.code}
         width={width ?? '600px'}
         height={height ?? '549px'}
-        theme={okaidia}
+        theme={theme ?? okaidia}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
       />
