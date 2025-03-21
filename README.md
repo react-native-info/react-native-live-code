@@ -7,6 +7,8 @@
 <strong>Live editing of React Native in browser</strong>
 <br><br>
 
+## [Try it out](https://reactnative.info/playground/)
+
 # react-native-live-code
 
 **react-native-live-code** is an lightweighted React Native editor with live preview. it is ideal for quick UI component prototyping or educational purposes. The live editor supports TypeScript.
