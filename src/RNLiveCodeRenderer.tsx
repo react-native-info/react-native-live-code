@@ -1,7 +1,7 @@
 import * as ReactNative from 'react-native-web';
 import * as ReactScope from 'react';
 import * as Babel from "@babel/standalone";
-import React, { useContext, useMemo, useState, useEffect } from 'react';
+import React, { useContext, useMemo, Component, ReactNode } from 'react';
 import { RNLiveCodeContext } from "./RNLiveCodeProvider";
 
 const rnKeys = Object.keys(ReactNative)
@@ -39,7 +39,7 @@ export const Renderer = () => {
                 transpiled
             )(React, exports, requireAlias, ...scopeValues);
 
-            return exports.default;
+            return (exports as any).default;
         } catch (error) {
             dispatch({ type: 'error', error })
         }
@@ -50,7 +50,14 @@ export const Renderer = () => {
     return Component ? <Component /> : null;
 }
 
-export class ErrorBoundary extends React.Component {
+interface ErrorBoundaryProps {
+    context: typeof RNLiveCodeContext;
+    dispatch: any;
+    children: ReactNode;
+}
+
+export class ErrorBoundary extends Component<ErrorBoundaryProps> {
+    props: ErrorBoundaryProps;
     constructor(props) {
         super(props);
     }
@@ -72,7 +79,12 @@ export class ErrorBoundary extends React.Component {
     }
 }
 
-export const RNLiveCodeRenderer = ({ width, height }) => {
+export interface RNLiveCodeRendererProps {
+    width?: number;
+    height?: number;
+}
+
+export const RNLiveCodeRenderer = ({ width, height }: RNLiveCodeRendererProps) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     return (

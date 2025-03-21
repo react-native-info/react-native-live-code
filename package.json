@@ -1,9 +1,10 @@
 {
   "name": "react-native-live-code",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "module",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
   "scripts": {

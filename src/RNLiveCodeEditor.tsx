@@ -1,10 +1,17 @@
-import React, { useCallback, useState, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { RNLiveCodeContext } from "./RNLiveCodeProvider";
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 
-export const RNLiveCodeEditor = ({ width, height, theme, onCodeChange }) => {
+export type RNLiveCodeEditorProps = {
+  width?: number;
+  height?: number;
+  theme?: any;
+  onCodeChange?: (code: string) => void
+}
+
+export const RNLiveCodeEditor: React.FC<RNLiveCodeEditorProps> = ({ width, height, theme, onCodeChange }) => {
   const { context, dispatch } = useContext(RNLiveCodeContext);
 
   const onChange = useCallback((code) => {

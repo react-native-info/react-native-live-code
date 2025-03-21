@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import React, { useReducer, createContext } from "react";
 
 const initialState = {
     code: '',
@@ -23,7 +23,12 @@ const reducer = (state, action) => {
 
 export const RNLiveCodeContext = createContext();
 
-export const RNLiveCodeProvider = ({ children, defaultCode }) => {
+export type RNLiveCodeProviderProps = {
+    children: React.ReactNode;
+    defaultCode: string;
+}
+
+export const RNLiveCodeProvider = ({ children, defaultCode }: RNLiveCodeProviderProps) => {
     const [context, dispatch] = useReducer(reducer, { ...initialState, code: defaultCode });
 
     return (
