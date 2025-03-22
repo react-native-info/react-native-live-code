@@ -36,7 +36,7 @@ npm install react-native-live-code
 
 ## `RNLiveCodeEditor` Component
 
-`RNLiveCodeEditor` is backed by [CodeMirror](https://codemirror.net/) for code highlighting and other lightweight IDE features.
+`RNLiveCodeEditor` is backed by [CodeMirror](https://codemirror.net/) for code highlighting and lightweight IDE features.
 
 | Prop               | Description                                                             | Default     |
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
