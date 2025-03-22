@@ -5,8 +5,8 @@ import { javascript } from '@codemirror/lang-javascript';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 
 export type RNLiveCodeEditorProps = {
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
   theme?: any;
   onCodeChange?: (code: string) => void
 }

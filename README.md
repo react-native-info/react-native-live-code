@@ -40,8 +40,8 @@ npm install react-native-live-code
 
 | Prop               | Description                                                             | Default     |
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
-| **`width`**        | Width of the editor view. Default value if not set.                     | 600px       |
-| **`height`**       | Width of the editor view. Default value if not set.                     | 549px       |
+| **`width`**        | Width of the editor view. Default value if not set.                     | '600px'     |
+| **`height`**       | Width of the editor view. Default value if not set.                     | '549px'     |
 | **`theme`**        | Be used to define a theme (e.g., @codemirror/theme-one-dark).           | okaidia     |
 | **`onCodeChange`** | A callback when editing occurs.                                         | undefined   |
 
@@ -51,8 +51,8 @@ npm install react-native-live-code
 
 | Prop               | Description                                                             | Default     |
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
-| **`width`**        | Width of the simulated viewport. Default value if not set.              | 285px       |
-| **`height`**       | Width of the simulated viewport. Default value if not set.              | 549px       |
+| **`width`**        | Width of the simulated viewport. Default value if not set.              | '285px'     |
+| **`height`**       | Width of the simulated viewport. Default value if not set.              | '549px'     |
 
 ## `RNLiveCodeProvider`
 

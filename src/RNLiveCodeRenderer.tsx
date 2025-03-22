@@ -80,8 +80,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 }
 
 export interface RNLiveCodeRendererProps {
-    width?: number;
-    height?: number;
+    width?: string;
+    height?: string;
 }
 
 export const RNLiveCodeRenderer = ({ width, height }: RNLiveCodeRendererProps) => {
