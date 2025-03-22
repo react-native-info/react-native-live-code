@@ -60,7 +60,7 @@ npm install react-native-live-code
 
 | Prop               | Description                                                             | Default     |
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
-| **`defaultCode`**  | The initial code that is placed in editor and is rendered renderer.     | ''          |
+| **`defaultCode`**  | The initial code that is in editor and rendered.     | ''          |
 
 ## License
 
