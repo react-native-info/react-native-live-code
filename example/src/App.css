@@ -7,3 +7,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+@font-face {
+  src: url(Ionicons.ttf);
+  font-family: "Ionicons";
+}

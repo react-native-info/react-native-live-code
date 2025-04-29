@@ -1,5 +1,6 @@
 import * as ReactNative from 'react-native-web';
 import * as ReactScope from 'react';
+import Icon from '@react-native-vector-icons/ionicons';
 import * as Babel from "@babel/standalone";
 import React, { useContext, useMemo, Component, ReactNode } from 'react';
 import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
@@ -7,9 +8,11 @@ import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
 const rnKeys = Object.keys(ReactNative)
 const reactKeys = Object.keys(ReactScope).filter((el) => el !== 'default');
 
-const allKeys = rnKeys.concat(reactKeys);
+const allKeys = rnKeys.concat(reactKeys).concat(['Icon']);
 
-const scopeValues = rnKeys.map((key) => ReactNative[key]).concat(reactKeys.map((key) => ReactScope[key]));
+const scopeValues = rnKeys.map((key) => ReactNative[key]).
+    concat(reactKeys.map((key) => ReactScope[key])).
+    concat([Icon]);
 
 let requireAlias = () => ReactNative;
 
