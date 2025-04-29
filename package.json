@@ -1,6 +1,6 @@
 {
   "name": "react-native-live-code",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "type": "module",
   "source": "src/index.ts",
   "main": "dist/index.js",
