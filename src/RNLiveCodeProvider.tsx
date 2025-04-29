@@ -1,6 +1,15 @@
-import React, { useReducer, createContext } from "react";
+import React, { useReducer, createContext, Dispatch } from "react";
 
-const initialState = {
+export interface LiveCodeState {
+    code: string;
+    errored: boolean;
+}
+
+type LiveCodeAction =
+    | { type: 'editing'; code: string; }
+    | { type: 'error'; error: Error };
+
+const initialState: LiveCodeState = {
     code: '',
     errored: false
 }
@@ -21,7 +30,10 @@ const reducer = (state, action) => {
     throw Error('Unknown action.');
 }
 
-export const RNLiveCodeContext = createContext();
+export const RNLiveCodeContext = createContext<{
+    context: LiveCodeState;
+    dispatch: Dispatch<LiveCodeAction>;
+}>({ context: initialState, dispatch: () => null });
 
 export type RNLiveCodeProviderProps = {
     children: React.ReactNode;

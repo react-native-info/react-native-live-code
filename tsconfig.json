@@ -2,6 +2,10 @@
   "compilerOptions": {
     "jsx": "react",
     "esModuleInterop": true,
+    "types": [
+      "react",
+      "react-dom"
+    ]
   }
 }
 

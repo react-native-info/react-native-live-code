@@ -2,7 +2,7 @@ import * as ReactNative from 'react-native-web';
 import * as ReactScope from 'react';
 import * as Babel from "@babel/standalone";
 import React, { useContext, useMemo, Component, ReactNode } from 'react';
-import { RNLiveCodeContext } from "./RNLiveCodeProvider";
+import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
 
 const rnKeys = Object.keys(ReactNative)
 const reactKeys = Object.keys(ReactScope).filter((el) => el !== 'default');
@@ -51,13 +51,12 @@ export const Renderer = () => {
 }
 
 interface ErrorBoundaryProps {
-    context: typeof RNLiveCodeContext;
+    context: LiveCodeState;
     dispatch: any;
     children: ReactNode;
 }
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps> {
-    props: ErrorBoundaryProps;
     constructor(props) {
         super(props);
     }
