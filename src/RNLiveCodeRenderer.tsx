@@ -4,15 +4,21 @@ import Icon from '@react-native-vector-icons/ionicons';
 import * as Babel from "@babel/standalone";
 import React, { useContext, useMemo, Component, ReactNode } from 'react';
 import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
+import * as ReactNavigationStackScope from '@react-navigation/stack';
+import * as ReactNavigationScope from '@react-navigation/native';
 
 const rnKeys = Object.keys(ReactNative)
 const reactKeys = Object.keys(ReactScope).filter((el) => el !== 'default');
+const reactNavigationKeys = Object.keys(ReactNavigationScope).filter((el) => el !== 'default');
+const reactNavigationStackKeys = Object.keys(ReactNavigationStackScope).filter((el) => el !== 'default');
 
-const allKeys = rnKeys.concat(reactKeys).concat(['Icon']);
+const allKeys = rnKeys.concat(reactKeys).concat(['Icon']).concat(reactNavigationKeys).concat(reactNavigationStackKeys);
 
 const scopeValues = rnKeys.map((key) => ReactNative[key]).
     concat(reactKeys.map((key) => ReactScope[key])).
-    concat([Icon]);
+    concat([Icon]).
+    concat(reactNavigationKeys.map((key) => ReactNavigationScope[key])).
+    concat(reactNavigationStackKeys.map((key) => ReactNavigationStackScope[key]));
 
 let requireAlias = () => ReactNative;
 
@@ -71,7 +77,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
     render() {
         if (this.props.context.errored) {
             return (
-                <div style={{ flex: 1, background: 'red' }}>
+                <div style={{ display: 'flex', flex: 1, background: 'red' }}>
                     <p>{this.props.context.errored.toString()}</p>
                 </div>
             );

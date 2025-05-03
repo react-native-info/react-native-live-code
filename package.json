@@ -16,9 +16,12 @@
     "@codemirror/lang-javascript": "^6.2.3",
     "@react-native-vector-icons/common": "^11.0.0",
     "@react-native-vector-icons/ionicons": "^7.4.0",
+    "@react-navigation/native": "^7.1.7",
+    "@react-navigation/stack": "^7.3.0",
     "@uiw/codemirror-theme-okaidia": "^4.23.9",
     "@uiw/codemirror-theme-quietlight": "^4.23.12",
     "@uiw/react-codemirror": "^4.23.9",
+    "react-native-safe-area-context": "^5.4.0",
     "react-native-web": "^0.19.13"
   },
   "peerDependencies": {
