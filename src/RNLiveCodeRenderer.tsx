@@ -99,6 +99,7 @@ export const RNLiveCodeRenderer = ({ width, height }: RNLiveCodeRendererProps) =
         <div style={{
             width: width ?? '285px',
             height: height ?? '549px',
+            display: 'flex',
             background: '#ffffff',
         }}>
             <ErrorBoundary context={context} dispatch={dispatch}>
