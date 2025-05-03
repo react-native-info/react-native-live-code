@@ -3,11 +3,12 @@ import { RNLiveCodeContext } from "./RNLiveCodeProvider";
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
+import { quietlight } from '@uiw/codemirror-theme-quietlight';
 
 export type RNLiveCodeEditorProps = {
   width?: string;
   height?: string;
-  theme?: any;
+  theme?: string;
   onCodeChange?: (code: string) => void
 }
 
@@ -32,8 +33,8 @@ export const RNLiveCodeEditor: React.FC<RNLiveCodeEditorProps> = ({ width, heigh
         value={context.code}
         width={width ?? '600px'}
         height={height ?? '549px'}
-        theme={theme ?? okaidia}
-        extensions={[javascript({ jsx: true })]}
+        theme={theme === 'dark' ? okaidia : quietlight}
+        extensions={[okaidia, quietlight, javascript({ jsx: true })]}
         onChange={onChange}
       />
     </div>
