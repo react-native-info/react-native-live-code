@@ -1,6 +1,6 @@
 {
   "name": "react-native-live-code",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -16,6 +16,7 @@
     "@codemirror/lang-javascript": "^6.2.3",
     "@react-native-vector-icons/common": "^11.0.0",
     "@react-native-vector-icons/ionicons": "^7.4.0",
+    "@react-navigation/bottom-tabs": "^7.3.12",
     "@react-navigation/native": "^7.1.7",
     "@react-navigation/stack": "^7.3.0",
     "@uiw/codemirror-theme-okaidia": "^4.23.9",

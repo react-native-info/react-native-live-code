@@ -5,20 +5,27 @@ import * as Babel from "@babel/standalone";
 import React, { useContext, useMemo, Component, ReactNode } from 'react';
 import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
 import * as ReactNavigationStackScope from '@react-navigation/stack';
+import * as ReactNavigationTabScope from '@react-navigation/bottom-tabs';
 import * as ReactNavigationScope from '@react-navigation/native';
 
 const rnKeys = Object.keys(ReactNative)
 const reactKeys = Object.keys(ReactScope).filter((el) => el !== 'default');
 const reactNavigationKeys = Object.keys(ReactNavigationScope).filter((el) => el !== 'default');
 const reactNavigationStackKeys = Object.keys(ReactNavigationStackScope).filter((el) => el !== 'default');
+const reactNavigationTabKeys = Object.keys(ReactNavigationTabScope).filter((el) => el !== 'default' && reactNavigationStackKeys.indexOf(el) < 0);
 
-const allKeys = rnKeys.concat(reactKeys).concat(['Icon']).concat(reactNavigationKeys).concat(reactNavigationStackKeys);
+const allKeys = rnKeys.concat(reactKeys)
+    .concat(['Icon'])
+    .concat(reactNavigationKeys)
+    .concat(reactNavigationStackKeys)
+    .concat(reactNavigationTabKeys);
 
-const scopeValues = rnKeys.map((key) => ReactNative[key]).
-    concat(reactKeys.map((key) => ReactScope[key])).
-    concat([Icon]).
-    concat(reactNavigationKeys.map((key) => ReactNavigationScope[key])).
-    concat(reactNavigationStackKeys.map((key) => ReactNavigationStackScope[key]));
+const scopeValues = rnKeys.map((key) => ReactNative[key])
+    .concat(reactKeys.map((key) => ReactScope[key]))
+    .concat([Icon])
+    .concat(reactNavigationKeys.map((key) => ReactNavigationScope[key]))
+    .concat(reactNavigationStackKeys.map((key) => ReactNavigationStackScope[key]))
+    .concat(reactNavigationTabKeys.map((key) => ReactNavigationTabScope[key]));
 
 let requireAlias = () => ReactNative;
 
