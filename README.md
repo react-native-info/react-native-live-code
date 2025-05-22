@@ -53,6 +53,7 @@ npm install react-native-live-code
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
 | **`width`**        | Width of the simulated viewport. Default value if not set.              | '285px'     |
 | **`height`**       | Width of the simulated viewport. Default value if not set.              | '549px'     |
+| **`loopDetector`** | Whether to enable the endless loop detector.                            | undefined   |
 
 ## `RNLiveCodeProvider`
 

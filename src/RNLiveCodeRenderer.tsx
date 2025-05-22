@@ -29,14 +29,14 @@ const scopeValues = rnKeys.map((key) => ReactNative[key])
 
 let requireAlias = () => ReactNative;
 
-export const Renderer = () => {
+export const Renderer = ({ loopDetector }: { loopDetector: boolean }) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     const Component = useMemo(() => {
         try {
             const code = context.code;
             if (!code) { return null; }
-            let exports = {};
+            let exports: any = {};
             let transpiled = Babel.transform(
                 code,
                 {
@@ -55,7 +55,7 @@ export const Renderer = () => {
                 transpiled
             )(React, exports, requireAlias, ...scopeValues);
 
-            return (exports as any).default;
+            return loopDetector ? proxyModule(exports.default) : exports.default;
         } catch (error) {
             dispatch({ type: 'error', error })
         }
@@ -97,9 +97,83 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 export interface RNLiveCodeRendererProps {
     width?: string;
     height?: string;
+    loopDetector?: boolean;
 }
 
-export const RNLiveCodeRenderer = ({ width, height }: RNLiveCodeRendererProps) => {
+
+interface Handler {
+    get?: Function;
+    set?: Function;
+    apply?: Function;
+    construct?: Function;
+}
+
+interface ProxyConstructor {
+    revocable<T extends object>(target: T, handler: Handler): { proxy: T; revoke: () => void; };
+    new <T extends object>(target: T, handler: Handler): T;
+}
+declare var Proxy: ProxyConstructor;
+
+const proxyModule = (module) => {
+    let count = 0;
+    let lastTimeCalled = undefined;
+
+    return new Proxy(module, {
+        apply(val, thisArg, args) {
+            const now = Date.now();
+            if (!lastTimeCalled) {
+                lastTimeCalled = now;
+                count = 1;
+                return val.apply(this, args);
+            }
+
+            const diff = now - lastTimeCalled;
+            if (diff <= 1000 && count > 300) {
+                throw new Error(`Infinite loop in ${module.name}`);
+            } else if (diff > 1000) {
+                lastTimeCalled = now;
+                count = 1;
+            } else {
+                count += 1;
+            }
+
+            return val.apply(thisArg, args);
+        },
+        construct(target, args) {
+            return new Proxy(new target(...args), {
+                get(target, prop, receiver) {
+                    const val = target[prop];
+                    if (typeof val === 'function' && (prop) === 'render') {
+                        return function (...args) {
+                            const now = Date.now();
+                            if (!lastTimeCalled) {
+                                lastTimeCalled = now;
+                                count = 1;
+                                return val.apply(this, args);
+                            }
+
+                            const diff = now - lastTimeCalled;
+                            if (diff <= 1000 && count > 300) {
+                                throw new Error(`Infinite loop in ${name}`);
+                            } else if (diff > 1000) {
+                                lastTimeCalled = now;
+                                count = 1;
+                            } else {
+                                count += 1;
+                            }
+
+                            return val.apply(this, args);
+                        }
+                    } else {
+                        return val;
+                    }
+                },
+            })
+        }
+    });
+}
+
+export const RNLiveCodeRenderer = ({ width, height, loopDetector }: RNLiveCodeRendererProps) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     return (
@@ -110,8 +184,8 @@ export const RNLiveCodeRenderer = ({ width, height }: RNLiveCodeRendererProps) =
             background: '#ffffff',
         }}>
             <ErrorBoundary context={context} dispatch={dispatch}>
-                <Renderer />
+                <Renderer loopDetector={loopDetector} />
             </ErrorBoundary>
-        </div>
+        </div >
     );
-}
+};
