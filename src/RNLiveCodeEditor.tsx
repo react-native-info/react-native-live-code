@@ -9,7 +9,7 @@ import * as Babel from "@babel/standalone";
 export type RNLiveCodeEditorProps = {
   width?: string;
   height?: string;
-  theme?: string;
+  theme?: 'dark' | 'light';
   onCodeChange?: (code: string) => void;
   showTranspiled: boolean;
 }

@@ -2,7 +2,7 @@ import * as ReactNative from 'react-native-web';
 import * as ReactScope from 'react';
 import Icon from '@react-native-vector-icons/ionicons';
 import * as Babel from "@babel/standalone";
-import React, { useContext, useMemo, Component, ReactNode } from 'react';
+import React, { useContext, useMemo, Component, ReactNode, useCallback } from 'react';
 import { LiveCodeState, RNLiveCodeContext } from "./RNLiveCodeProvider";
 import * as ReactNavigationStackScope from '@react-navigation/stack';
 import * as ReactNavigationTabScope from '@react-navigation/bottom-tabs';
@@ -20,20 +20,35 @@ const allKeys = rnKeys.concat(reactKeys)
     .concat(reactNavigationStackKeys)
     .concat(reactNavigationTabKeys);
 
-const scopeValues = rnKeys.map((key) => ReactNative[key])
-    .concat(reactKeys.map((key) => ReactScope[key]))
-    .concat([Icon])
-    .concat(reactNavigationKeys.map((key) => ReactNavigationScope[key]))
-    .concat(reactNavigationStackKeys.map((key) => ReactNavigationStackScope[key]))
-    .concat(reactNavigationTabKeys.map((key) => ReactNavigationTabScope[key]));
-
 let requireAlias = () => ReactNative;
 
-export const Renderer = ({ loopDetector }: { loopDetector: boolean }) => {
+export type RNRendererProps = {
+    loopDetector: boolean;
+    theme?: 'dark' | 'light';
+}
+
+export const Renderer = ({ loopDetector, theme }: RNRendererProps) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
+
+    const overriddenUseColorScheme = useCallback(() => {
+        return theme ?? null;
+    }, [theme])
 
     const Component = useMemo(() => {
         try {
+            const scopeValues = rnKeys.map((key) => {
+                if (key === 'useColorScheme') {
+                    return overriddenUseColorScheme;
+                } else {
+                    return ReactNative[key];
+                }
+            })
+                .concat(reactKeys.map((key) => ReactScope[key]))
+                .concat([Icon])
+                .concat(reactNavigationKeys.map((key) => ReactNavigationScope[key]))
+                .concat(reactNavigationStackKeys.map((key) => ReactNavigationStackScope[key]))
+                .concat(reactNavigationTabKeys.map((key) => ReactNavigationTabScope[key]));
+
             const code = context.code;
             if (!code) { return null; }
             let exports: any = {};
@@ -61,7 +76,7 @@ export const Renderer = ({ loopDetector }: { loopDetector: boolean }) => {
         }
 
         return null;
-    }, [context.code]);
+    }, [context.code, overriddenUseColorScheme]);
 
     return Component ? <Component /> : null;
 }
@@ -98,6 +113,7 @@ export interface RNLiveCodeRendererProps {
     width?: string;
     height?: string;
     loopDetector?: boolean;
+    theme?: 'dark' | 'light';
 }
 
 
@@ -173,7 +189,7 @@ const proxyModule = (module) => {
     });
 }
 
-export const RNLiveCodeRenderer = ({ width, height, loopDetector }: RNLiveCodeRendererProps) => {
+export const RNLiveCodeRenderer = ({ width, height, loopDetector, theme }: RNLiveCodeRendererProps) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     return (
@@ -184,7 +200,7 @@ export const RNLiveCodeRenderer = ({ width, height, loopDetector }: RNLiveCodeRe
             background: '#ffffff',
         }}>
             <ErrorBoundary context={context} dispatch={dispatch}>
-                <Renderer loopDetector={loopDetector} />
+                <Renderer loopDetector={loopDetector} theme={theme} />
             </ErrorBoundary>
         </div >
     );
