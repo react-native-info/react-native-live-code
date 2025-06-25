@@ -7,7 +7,7 @@
 <strong>Live editing of React Native in browser</strong>
 <br><br>
 
-## [Try it out](https://reactnative.info/playground/)
+## [Try it out](https://reactnative.info/routes/playground)
 
 # react-native-live-code
 
@@ -44,6 +44,7 @@ npm install react-native-live-code
 | **`height`**       | Width of the editor view. Default value if not set.                     | '549px'     |
 | **`theme`**        | Be used to define a theme (e.g., @codemirror/theme-one-dark).           | okaidia     |
 | **`onCodeChange`** | A callback when editing occurs.                                         | undefined   |
+| **`showTranspiled`** | `true` to displayed the transpiled JavaScript instead of JSX (not editable)               | undefined   |
 
 ## `RNLiveCodeRenderer` Component
 
@@ -53,7 +54,7 @@ npm install react-native-live-code
 | ------------------ | ----------------------------------------------------------------------- | ----------- |
 | **`width`**        | Width of the simulated viewport. Default value if not set.              | '285px'     |
 | **`height`**       | Width of the simulated viewport. Default value if not set.              | '549px'     |
-| **`loopDetector`** | Whether to enable the endless loop detector.                            | undefined   |
+| **`loopDetector`** | Whether to enable the endless loop detector (the exported component only).               | undefined   |
 
 ## `RNLiveCodeProvider`
 
