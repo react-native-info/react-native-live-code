@@ -37,7 +37,6 @@ Thumbs.db
 
 # npm/yarn/pnpm files
 package-lock.json
-yarn.lock
 pnpm-lock.yaml
 
 # Debug files
