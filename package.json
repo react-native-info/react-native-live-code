@@ -1,6 +1,6 @@
 {
   "name": "react-native-live-code",
-  "version": "0.1.8",
+  "version": "0.2.1",
   "type": "module",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -21,23 +21,24 @@
     "@react-navigation/stack": "^7.3.0",
     "@uiw/codemirror-theme-okaidia": "^4.23.9",
     "@uiw/codemirror-theme-quietlight": "^4.23.12",
-    "@uiw/react-codemirror": "^4.23.9",
-    "react-native-safe-area-context": "^5.4.0",
-    "react-native-web": "^0.21.2"
-  },
-  "peerDependencies": {
+    "@uiw/react-codemirror": "4.25.9",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-native": "^0.85.2",
+    "react-native-gesture-handler": "^2.31.1",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "^4.24.0",
+    "react-native-web": "^0.21.2"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "microbundle": "^0.15.1",
-    "react-native": "^0.85.2"
+    "microbundle": "^0.15.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-native-info/react-native-live-code.git"
   },
-  "homepage": "https://reactnative.info"
+  "homepage": "https://reactnative.info",
+  "packageManager": "yarn@4.14.1"
 }
