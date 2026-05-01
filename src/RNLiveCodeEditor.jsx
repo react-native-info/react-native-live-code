@@ -10,7 +10,7 @@ import * as Babel from "@babel/standalone";
 export const RNLiveCodeEditor = ({ width, height, theme, onCodeChange, showTranspiled }) => {
   const { context, dispatch } = useContext(RNLiveCodeContext);
   const savedCode = useRef(context.code);
-  const [transpiledCode, setTranspiledCode] = useState<undefined | string>(undefined);
+  const [transpiledCode, setTranspiledCode] = useState(undefined);
 
   useEffect(() => {
     if (showTranspiled) {

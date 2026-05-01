@@ -98,8 +98,6 @@ export class ErrorBoundary extends Component {
     }
 }
 
-var Proxy;
-
 const proxyModule = (module) => {
     let count = 0;
     let lastTimeCalled = undefined;

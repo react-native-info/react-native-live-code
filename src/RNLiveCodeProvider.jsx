@@ -1,5 +1,10 @@
 import React, { useReducer, createContext, Dispatch } from "react";
 
+const initialState = {
+    code: '',
+    errored: false
+}
+
 const reducer = (state, action) => {
     if (action.type === 'editing') {
         return {
