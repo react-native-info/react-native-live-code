@@ -1,19 +1,5 @@
 import React, { useReducer, createContext, Dispatch } from "react";
 
-export interface LiveCodeState {
-    code: string;
-    errored: boolean;
-}
-
-type LiveCodeAction =
-    | { type: 'editing'; code: string; }
-    | { type: 'error'; error: Error };
-
-const initialState: LiveCodeState = {
-    code: '',
-    errored: false
-}
-
 const reducer = (state, action) => {
     if (action.type === 'editing') {
         return {
@@ -30,17 +16,9 @@ const reducer = (state, action) => {
     throw Error('Unknown action.');
 }
 
-export const RNLiveCodeContext = createContext<{
-    context: LiveCodeState;
-    dispatch: Dispatch<LiveCodeAction>;
-}>({ context: initialState, dispatch: () => null });
+export const RNLiveCodeContext = createContext({ context: initialState, dispatch: () => null });
 
-export type RNLiveCodeProviderProps = {
-    children: React.ReactNode;
-    defaultCode: string;
-}
-
-export const RNLiveCodeProvider = ({ children, defaultCode }: RNLiveCodeProviderProps) => {
+export const RNLiveCodeProvider = ({ children, defaultCode }) => {
     const [context, dispatch] = useReducer(reducer, { ...initialState, code: defaultCode });
 
     return (

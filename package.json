@@ -23,7 +23,7 @@
     "@uiw/codemirror-theme-quietlight": "^4.23.12",
     "@uiw/react-codemirror": "^4.23.9",
     "react-native-safe-area-context": "^5.4.0",
-    "react-native-web": "^0.19.13"
+    "react-native-web": "^0.21.2"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -33,7 +33,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "microbundle": "^0.15.1",
-    "react-native": "^0.77.0"
+    "react-native": "^0.85.2"
   },
   "repository": {
     "type": "git",

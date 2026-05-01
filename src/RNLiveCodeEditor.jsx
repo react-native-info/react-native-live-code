@@ -6,15 +6,8 @@ import { okaidia } from '@uiw/codemirror-theme-okaidia';
 import { quietlight } from '@uiw/codemirror-theme-quietlight';
 import * as Babel from "@babel/standalone";
 
-export type RNLiveCodeEditorProps = {
-  width?: string;
-  height?: string;
-  theme?: 'dark' | 'light';
-  onCodeChange?: (code: string) => void;
-  showTranspiled: boolean;
-}
 
-export const RNLiveCodeEditor: React.FC<RNLiveCodeEditorProps> = ({ width, height, theme, onCodeChange, showTranspiled }) => {
+export const RNLiveCodeEditor = ({ width, height, theme, onCodeChange, showTranspiled }) => {
   const { context, dispatch } = useContext(RNLiveCodeContext);
   const savedCode = useRef(context.code);
   const [transpiledCode, setTranspiledCode] = useState<undefined | string>(undefined);

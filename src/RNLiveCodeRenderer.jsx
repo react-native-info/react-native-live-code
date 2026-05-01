@@ -22,12 +22,7 @@ const allKeys = rnKeys.concat(reactKeys)
 
 let requireAlias = () => ReactNative;
 
-export type RNRendererProps = {
-    loopDetector: boolean;
-    theme?: 'dark' | 'light';
-}
-
-export const Renderer = ({ loopDetector, theme }: RNRendererProps) => {
+export const Renderer = ({ loopDetector, theme }) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     const overriddenUseColorScheme = useCallback(() => {
@@ -51,7 +46,7 @@ export const Renderer = ({ loopDetector, theme }: RNRendererProps) => {
 
             const code = context.code;
             if (!code) { return null; }
-            let exports: any = {};
+            let exports = {};
             let transpiled = Babel.transform(
                 code,
                 {
@@ -81,13 +76,7 @@ export const Renderer = ({ loopDetector, theme }: RNRendererProps) => {
     return Component ? <Component /> : null;
 }
 
-interface ErrorBoundaryProps {
-    context: LiveCodeState;
-    dispatch: any;
-    children: ReactNode;
-}
-
-export class ErrorBoundary extends Component<ErrorBoundaryProps> {
+export class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
     }
@@ -109,26 +98,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
     }
 }
 
-export interface RNLiveCodeRendererProps {
-    width?: string;
-    height?: string;
-    loopDetector?: boolean;
-    theme?: 'dark' | 'light';
-}
-
-
-interface Handler {
-    get?: Function;
-    set?: Function;
-    apply?: Function;
-    construct?: Function;
-}
-
-interface ProxyConstructor {
-    revocable<T extends object>(target: T, handler: Handler): { proxy: T; revoke: () => void; };
-    new <T extends object>(target: T, handler: Handler): T;
-}
-declare var Proxy: ProxyConstructor;
+var Proxy;
 
 const proxyModule = (module) => {
     let count = 0;
@@ -189,7 +159,7 @@ const proxyModule = (module) => {
     });
 }
 
-export const RNLiveCodeRenderer = ({ width, height, loopDetector, theme }: RNLiveCodeRendererProps) => {
+export const RNLiveCodeRenderer = ({ width, height, loopDetector, theme }) => {
     const { context, dispatch } = useContext(RNLiveCodeContext);
 
     return (
